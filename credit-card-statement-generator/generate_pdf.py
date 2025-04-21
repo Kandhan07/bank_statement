@@ -66,15 +66,16 @@ def create_statement_pdf(customer_id=1):
     logo_path = os.path.join(os.path.dirname(__file__), 'static', 'images', 'logo.png')
     pdf.image(logo_path, x=10, y=10, w=30)
     
+    
     # Header with date and statement number
     pdf.set_font('Arial', 'B', 16)
-    pdf.cell(30)  # Space for logo
-    pdf.cell(0, 10, 'Credit Card Statement', 0, 1, 'C')
-    
+    pdf.cell(0, 10, 'HSBC Credit Card Statement', 0, 1, 'C')  # Centered title
+
     pdf.set_font('Arial', '', 10)
-    pdf.cell(30)  # Space for logo
-    pdf.cell(0, 5, f'Statement Date: {datetime.now().strftime("%B %d, %Y")}', 0, 1, 'C')
-    pdf.ln(15)
+    pdf.cell(0, 5, f'Statement Date: {datetime.now().strftime("%B %d, %Y")}', 0, 1, 'C')  # Centered date
+
+    pdf.ln(15)  # Line break after header
+
     
     # Add decorative line
     pdf.set_draw_color(219, 0, 17)  # HSBC Red
@@ -82,26 +83,89 @@ def create_statement_pdf(customer_id=1):
     pdf.line(10, pdf.get_y(), 200, pdf.get_y())
     pdf.ln(10)
     
-    # Customer Information Section
+    # Customer Information Title with light green background
+    pdf.set_fill_color(219, 0, 17)  # Light green
+    pdf.set_text_color(255, 255, 255)        # Black text
     pdf.set_font('Arial', 'B', 12)
-    pdf.cell(0, 10, 'Customer Information', 0, 1)
-    pdf.set_font('Arial', '', 10)
-    pdf.cell(0, 6, f"Name: {customer['full_name']}", 0, 1)
-    pdf.cell(0, 6, f"Email: {customer['email']}", 0, 1)
-    pdf.cell(0, 6, f"Phone: {customer['phone']}", 0, 1)
-    pdf.cell(0, 6, f"Address: {customer['address']}", 0, 1)
-    pdf.ln(5)
+    pdf.cell(0, 10, 'Customer Information', 0, 1, 'L', fill=True)
     
-    # Account Information Section
+    pdf.ln(5) 
+    # Customer Information Details in dark grey
+    # Set font and styling
+
+    # Table headers (Key | Value)
+    pdf.set_font('Arial', 'B', 9)
+    pdf.set_fill_color(220, 220, 220)  # Light gray for headers
+    pdf.set_text_color(0, 0, 0)
+
+    pdf.cell(50, 8, 'Field', 1, 0, 'C', fill=True)
+    pdf.cell(0, 8, 'Details', 1, 1, 'C', fill=True)
+
+    # Table rows (Details)
+    pdf.set_font('Arial', '', 9)
+    pdf.set_fill_color(245, 245, 245)  # Very light gray background for rows
+
+    pdf.cell(50, 6, 'Name', 1, 0, 'L', fill=True)
+    pdf.cell(0, 6, customer['full_name'], 1, 1, 'L', fill=True)
+
+    pdf.cell(50, 6, 'Email', 1, 0, 'L', fill=True)
+    pdf.cell(0, 6, customer['email'], 1, 1, 'L', fill=True)
+
+    pdf.cell(50, 6, 'Phone', 1, 0, 'L', fill=True)
+    pdf.cell(0, 6, customer['phone'], 1, 1, 'L', fill=True)
+
+    pdf.cell(50, 6, 'Address', 1, 0, 'L', fill=True)
+    pdf.cell(0, 6, customer['address'], 1, 1, 'L', fill=True)
+
+    pdf.ln(5)
+
+
+     
+
+    # Account Information Title with background color
+    pdf.set_fill_color(219, 0, 17)  # Light blue background
+    pdf.set_text_color(255, 255, 255)        # Black text
     pdf.set_font('Arial', 'B', 12)
-    pdf.cell(0, 10, 'Account Information', 0, 1)
-    pdf.set_font('Arial', '', 10)
-    pdf.cell(0, 6, f"Card Number: XXXX-XXXX-XXXX-{customer['card_number'][-4:]}", 0, 1)
-    pdf.cell(0, 6, f"Account Number: {customer['account_number']}", 0, 1)
-    pdf.cell(0, 6, f"Credit Limit: ${customer['credit_limit']:,.2f}", 0, 1)
-    pdf.cell(0, 6, f"Available Credit: ${customer['available_credit']:,.2f}", 0, 1)
-    pdf.cell(0, 6, f"Reward Points: {customer['available_points']}", 0, 1)
-    pdf.ln(10)
+    pdf.cell(0, 10, 'Account Information', 0, 1, 'L', fill=True)
+
+    # Account Information Title with blue background
+   
+    pdf.ln(5)  # Adds space between title and table
+
+    # Table headers (Field | Value)
+    pdf.set_font('Arial', 'B', 9)
+    pdf.set_fill_color(220, 220, 220)  # Light gray for headers
+    pdf.set_text_color(0, 0, 0)
+
+    pdf.cell(50, 8, 'Field', 1, 0, 'C', fill=True)
+    pdf.cell(0, 8, 'Details', 1, 1, 'C', fill=True)
+
+    # Table rows (Details)
+    pdf.set_font('Arial', '', 9)
+    pdf.set_fill_color(245, 245, 245)  # Very light gray for rows
+
+    pdf.cell(50, 6, 'Card Number', 1, 0, 'L', fill=True)
+    pdf.cell(0, 6, f"XXXX-XXXX-XXXX-{customer['card_number'][-4:]}", 1, 1, 'L', fill=True)
+
+    pdf.cell(50, 6, 'Account Number', 1, 0, 'L', fill=True)
+    pdf.cell(0, 6, customer['account_number'], 1, 1, 'L', fill=True)
+
+    pdf.cell(50, 6, 'Credit Limit', 1, 0, 'L', fill=True)
+    pdf.cell(0, 6, f"${customer['credit_limit']:,.2f}", 1, 1, 'L', fill=True)
+
+    pdf.cell(50, 6, 'Available Credit', 1, 0, 'L', fill=True)
+    pdf.cell(0, 6, f"${customer['available_credit']:,.2f}", 1, 1, 'L', fill=True)
+
+    pdf.cell(50, 6, 'Reward Points', 1, 0, 'L', fill=True)
+    pdf.cell(0, 6, str(customer['available_points']), 1, 1, 'L', fill=True)
+
+    pdf.ln(5)  # Space before next section
+
+    # Reset text color for next section
+    pdf.set_text_color(0, 0, 0)
+
+
+    
     
     # Transaction Section
     # Modify Transaction Section styling
@@ -149,29 +213,40 @@ def create_statement_pdf(customer_id=1):
         pdf.set_text_color(0, 0, 0)  # Reset text color
     
     # Summary Section with improved styling
-    pdf.ln(10)
-    pdf.set_font('Arial', 'B', 10)
-    pdf.set_draw_color(200, 200, 200)
-    pdf.set_line_width(0.1)
-    pdf.line(130, pdf.get_y(), 200, pdf.get_y())
+   
     
-    # Right-aligned summary
-    pdf.set_text_color(219, 0, 17)  # Red for debits
-    pdf.cell(130)  # Move to right side
-    pdf.cell(30, 6, "Total Debits:", 0, 0, 'L')
-    pdf.cell(40, 6, f"${total_debit:,.2f}", 0, 1, 'R')
-    
-    pdf.set_text_color(0, 102, 204)  # Blue for credits
-    pdf.cell(130)
-    pdf.cell(30, 6, "Total Credits:", 0, 0, 'L')
-    pdf.cell(40, 6, f"${total_credit:,.2f}", 0, 1, 'R')
-    
-    pdf.set_text_color(0, 0, 0)  # Black for net
+    pdf.ln(5)
+
+    # Heading: Current Balance (Styled with red background and white text)
+    pdf.set_fill_color(219, 0, 17)       # Red background
+    pdf.set_text_color(255, 255, 255)    # White text
+    pdf.set_font('Arial', 'B', 12)
+    pdf.cell(0, 10, "Current Balance", ln=True, fill=True)
+
+    pdf.ln(5)
+    # Red for Total Debits
+    pdf.set_fill_color(255, 240, 240)  # Light red fill
+    pdf.set_text_color(219, 0, 17)     # Red text
+    pdf.cell(30, 6, "Total Debits:", 0, 0, 'L', fill=True)
+    pdf.cell(40, 6, f"${total_debit:,.2f}", 0, 1, 'L', fill=True)
+
+    # Blue for Total Credits
+    pdf.set_fill_color(235, 245, 255)  # Light blue fill
+    pdf.set_text_color(0, 102, 204)    # Blue text
+    pdf.cell(30, 6, "Total Credits:", 0, 0, 'L', fill=True)
+    pdf.cell(40, 6, f"${total_credit:,.2f}", 0, 1, 'L', fill=True)
+
+    # Black bold for Net Activity
+    pdf.set_fill_color(240, 240, 240)  # Light gray fill
+    pdf.set_text_color(0, 0, 0)
     pdf.set_font('Arial', 'B', 11)
-    pdf.cell(130)
-    pdf.cell(30, 8, "Net Activity:", 0, 0, 'L')
-    pdf.cell(40, 8, f"${total_credit - total_debit:,.2f}", 0, 1, 'R')
-    
+    pdf.cell(30, 8, "Net Activity:", 0, 0, 'L', fill=True)
+    pdf.cell(40, 8, f"${total_credit - total_debit:,.2f}", 0, 1, 'L', fill=True)
+
+    # Line break after summary
+    pdf.ln(5)
+
+
     # Save the PDF
     statements_dir = ensure_statements_directory()
     output_file = os.path.join(statements_dir, f'statement_customer_{customer_id}.pdf')
