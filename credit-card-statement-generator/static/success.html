@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statement Generated</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-logo">HSBC Bank</div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="card success-card">
+            <h1 class="success-title">Statement Generated Successfully!</h1>
+            <p class="success-message">Your statement has been generated for Customer ID: {{ customer_id }}</p>
+            <div class="button-group">
+                <a href="{{ url_for('download', customer_id=customer_id) }}" class="button download-btn">Download Statement</a>
+                <a href="{{ url_for('index') }}" class="button generate-another-btn">Generate Another</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
