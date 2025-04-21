@@ -1,68 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Statement Ready</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            min-height: 100vh;
-            background: url("{{ url_for('static', filename='images/6379114.jpg') }}") no-repeat center center fixed;
-            background-size: cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .container {
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 40px 50px;
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            max-width: 600px;
-        }
-
-        h2 {
-            color: #28a745;
-            margin-bottom: 20px;
-        }
-
-        p {
-            color: #333;
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-
-        a {
-            display: inline-block;
-            background-color: #007bff;
-            color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-
-        a:hover {
-            background-color: #0056b3;
-        }
-
-        small {
-            display: block;
-            margin-top: 20px;
-            color: #888;
-            font-size: 14px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statement Generated</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-logo">HSBC Bank</div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
-        <h2>Your Statement is Ready!</h2>
-        <p>Your statement has been generated successfully.</p>
-        <a href="{{ url_for('download', filename=filename) }}">Download PDF</a>
-        <small>Debug info: Filename is "{{ filename }}"</small>
+        <div class="card success-card">
+            <h1 class="success-title">Statement Generated Successfully!</h1>
+            <p class="success-message">Your statement has been generated for Customer ID: {{ customer_id }}</p>
+            <div class="button-group">
+                <a href="{{ url_for('download', customer_id=customer_id) }}" class="button download-btn">Download Statement</a>
+                <a href="{{ url_for('index') }}" class="button generate-another-btn">Generate Another</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>
