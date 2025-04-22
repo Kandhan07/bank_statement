@@ -3,29 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Statement Generated</title>
+    <title>Statement Generated - HSBC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #483D8B;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #ffffff;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 20px;
+            color: #483D8B;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+        }
+
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #d50000;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background-color: #d50000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #b30000;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            color: #d50000;
+            background: transparent;
+            border: 2px solid #d50000;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #d50000;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        nav ul li a.active {
+            color: #d50000;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 150px auto;
+            background-color: #ffffff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .success-message {
+            color: #28a745;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .container p {
+            font-size: 16px;
+            color: #333;
+            margin: 15px 0;
+        }
+
+        .download-btn {
+            background-color: #d50000;
+            color: #fff;
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .download-btn:hover {
+            background-color: #b30000;
+            transform: scale(1.05);
+        }
+
+        a {
+            color: #483D8B;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #2c265f;
+            text-decoration: underline;
+        }
+
+        /* NEW: Styled box for "Generate Another Statement" */
+        .another-statement-box {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border: 2px dashed #483D8B;
+            border-radius: 10px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        nav ul li a.active {
+            color: #d50000;  /* or any color that stands out */
+            font-weight: bold;
+        }
+
+
+        .another-statement-box a {
+            font-size: 16px;
+            font-weight: 600;
+            color: #483D8B;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .another-statement-box:hover {
+            background-color: #e0e0ff;
+        }
+
+        .another-statement-box a:hover {
+            color: #2c265f;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-content">
-            <div class="nav-logo">HSBC Bank</div>
-            <ul class="nav-links">
-                <li><a href="{{ url_for('index') }}">Home</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
+    <nav>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="HSBC Logo" width="80" />
+            HSBC Bank
+        </div>
+        <ul>
+            <li><a href="{{ url_for('index') }}" class="{% if current_page == 'index' %}active{% endif %}">Home</a></li>
+            <li><a href="{{ url_for('about') }}" class="{% if current_page == 'about' %}active{% endif %}">About</a></li>
+            <li><a href="{{ url_for('bank_statement') }}" class="{% if current_page == 'bank_statement' %}active{% endif %}">Bank Statement</a></li>
+        </ul>
+        
+        <div class="nav-buttons">
+            <button class="btn-secondary">Contact Us</button>
+            <button class="btn-primary">Get Started</button>
         </div>
     </nav>
+
     <div class="container">
-        <div class="card success-card">
-            <h1 class="success-title">Statement Generated Successfully!</h1>
-            <p class="success-message">Your statement has been generated for Customer ID: {{ customer_id }}</p>
-            <div class="button-group">
-                <a href="{{ url_for('download', customer_id=customer_id) }}" class="button download-btn">Download Statement</a>
-                <a href="{{ url_for('index') }}" class="button generate-another-btn">Generate Another</a>
-            </div>
+        <h1 class="success-message">Statement Generated Successfully!</h1>
+        <p>Your statement has been generated for Customer ID: {{ customer_id }}</p>
+        <a href="{{ url_for('download', customer_id=customer_id) }}" class="download-btn">Download Statement</a>
+
+        <!-- NEW: Another Statement Section -->
+        <div class="another-statement-box">
+            <a href="{{ url_for('bank_statement') }}">🔁 Generate Another Statement</a>
         </div>
     </div>
 </body>

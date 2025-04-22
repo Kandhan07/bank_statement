@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About HSBC Bank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background: linear-gradient(to right, #94929c, #6A5ACD);
+        }
+
+
+        .about-container {  
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 40px;
+            background: linear-gradient(to right,#40a5ca, #a8d868 );  /* HSBC Red */
+            border-radius: 10px;
+            color: white;
+        }
+
+        .about-title {
+            color: white;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .about-card {
+            background: white;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .about-card h3 {
+            color: #d50000;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .about-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav style="background-color: white;">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="HSBC Logo" width="60" />
+            HSBC Bank
+        </div>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}" class="active">About</a></li>
+            <li><a href="{{ url_for('bank_statement') }}">Bank Statement</a></li>
+        </ul>
+        <div class="nav-buttons">
+            <button class="btn-secondary">Contact Us</button>
+            <button class="btn-primary">Get started</button>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <div class="about-container">
+        <h1 class="about-title">About HSBC Bank</h1>
+        
+        <div class="about-card">
+            <h3>🌍 Global Presence</h3>
+            <p>HSBC operates in over 60 countries, connecting businesses and individuals across continents to financial opportunities and services.</p>
+        </div>
+
+        <div class="about-card">
+            <h3>💼 Comprehensive Services</h3>
+            <p>Our offerings include personal banking, commercial and corporate banking, global markets, wealth management, and investment services.</p>
+        </div>
+
+        <div class="about-card">
+            <h3>🚀 Innovation & Technology</h3>
+            <p>HSBC focuses on digital banking and financial innovation to provide customers with seamless, secure, and modern financial tools worldwide.</p>
+        </div>
+
+        <div class="about-card">
+            <h3>🌱 Commitment to Sustainability</h3>
+            <p>We are dedicated to financing sustainable development and supporting projects that promote green energy, climate responsibility, and social impact.</p>
+        </div>
+
+        <div class="about-card">
+            <h3>🤝 Trust & Customer Focus</h3>
+            <p>Our mission is to build long-term customer relationships based on trust, transparency, and financial empowerment.</p>
+        </div>
+    </div>
+</body>
+</html>
