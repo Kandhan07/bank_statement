@@ -53,7 +53,7 @@ def create_statement_pdf(customer_id=1):
     data = get_data_from_db(customer_id)
     if not data or len(data) == 0:
         print("No data found or database error")
-        return None
+        return
     
     # Create PDF
     pdf = FPDF()
@@ -250,13 +250,8 @@ def create_statement_pdf(customer_id=1):
     # Save the PDF
     statements_dir = ensure_statements_directory()
     output_file = os.path.join(statements_dir, f'statement_customer_{customer_id}.pdf')
-    try:
-        pdf.output(output_file)
-        print(f"PDF generated successfully: {output_file}")
-        return output_file  # Return the full path
-    except Exception as e:
-        print(f"Error generating PDF: {e}")
-        return None
+    pdf.output(output_file)
+    print(f"PDF generated successfully: {output_file}")
 
 if __name__ == "__main__":
     try:

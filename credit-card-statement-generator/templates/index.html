@@ -3,44 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HSBC Style Page</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <title>HSBC Statement Generator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <style>
-        html { scroll-behavior: smooth; }
-    </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav>
-        <div class="logo">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="HSBC Logo" width="60" />
-            HSBC Bank
-        </div>
-        <ul>
-            <li><a href="{{ url_for('index') }}" class="active">Home</a></li>
-            <li><a href="{{ url_for('about') }}">About</a></li>
-            <li><a href="{{ url_for('bank_statement') }}">Bank Statement</a></li>
-        </ul>
-        <div class="nav-buttons">
-            <button class="btn-secondary">Contact Us</button>
-            <button class="btn-primary">Get started</button>
+    <!-- Add Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-logo">HSBC Bank</div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}" class="active">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1 style="color: aliceblue;">Empowering businesses through <span class="highlight">financial clarity</span></h1>
-            <p style="color: aliceblue;">We help businesses make smarter decisions through precise, transparent, and simplified financial management. Whether you're a startup or scaling enterprise, we bring clarity to your numbers so you can focus on growth.</p>
-            <div class="hero-buttons">
-                <button class="btn-primary">Get Started</button>
-                <button class="btn-secondary">Learn More</button>
-            </div>
+    <div class="container">
+        <div class="card">
+            <h1>HSBC Credit Card Statement Generator</h1>
+            <form action="{{ url_for('generate') }}" method="post">
+                <div class="form-group">
+                    <label for="customer_id">Enter Customer ID (1-3):</label>
+                    <input type="number" id="customer_id" name="customer_id" min="1" max="3" required>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="generate-btn">Generate Statement</button>
+                    <button type="reset" class="clear-btn">Clear</button>
+                </div>
+            </form>
         </div>
-        <div class="hero-image">
-            <img src="{{ url_for('static', filename='images/main.png') }}" alt="Card Mockup" width="550">
-        </div>
-    </section>
+    </div>
 </body>
 </html>
